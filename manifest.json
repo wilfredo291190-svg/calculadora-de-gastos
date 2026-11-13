@@ -1,0 +1,26 @@
+{
+  "name": "MiBalance — Finanzas Personales",
+  "short_name": "MiBalance",
+  "description": "Calculadora y administrador personal de ingresos y gastos 100% offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%230f172a'/%3E%3Cpath d='M48 118l30-30 24 24 42-46' fill='none' stroke='%2310b981' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='144' cy='66' r='11' fill='%2338bdf8'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230f172a'/%3E%3Cpath d='M128 314l80-80 64 64 112-122' fill='none' stroke='%2310b981' stroke-width='36' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='384' cy='176' r='28' fill='%2338bdf8'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
