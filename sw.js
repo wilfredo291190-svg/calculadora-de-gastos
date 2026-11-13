@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mibalance-pwa-v3';
+const CACHE_NAME = 'mibalance-pwa-v4';
 const APP_SHELL = [
   './',
   './index.html',
