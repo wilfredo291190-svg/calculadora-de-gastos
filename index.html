@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="description" content="Calculadora y administrador personal de ingresos y gastos 100% privado y offline.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MiBalance — Finanzas Personales</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cpath d='M18 38l10-10 8 8 12-14' fill='none' stroke='%2310b981' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='48' cy='22' r='4' fill='%2310b981'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <h1>MiBalance</h1>
+          <p class="subtitle">Control personal</p>
+        </div>
+      </div>
+      <button type="button" id="toggle-calc-btn" class="icon-btn" aria-expanded="false" aria-controls="calculator-panel" title="Abrir calculadora">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2"/>
+          <line x1="8" y1="6" x2="16" y2="6"/>
+          <line x1="8" y1="10" x2="8" y2="10.01"/>
+          <line x1="12" y1="10" x2="12" y2="10.01"/>
+          <line x1="16" y1="10" x2="16" y2="10.01"/>
+          <line x1="8" y1="14" x2="8" y2="14.01"/>
+          <line x1="12" y1="14" x2="12" y2="14.01"/>
+          <line x1="16" y1="14" x2="16" y2="14.01"/>
+          <line x1="8" y1="18" x2="12" y2="18"/>
+          <line x1="16" y1="18" x2="16" y2="18.01"/>
+        </svg>
+        <span>Calculadora</span>
+      </button>
+    </header>
+
+    <!-- Dashboard Superior -->
+    <section class="dashboard" aria-label="Resumen financiero">
+      <article class="card balance-card" id="balance-card">
+        <div class="card-header">
+          <span class="card-label">Balance Disponible</span>
+          <span class="balance-badge" id="balance-status">Al día</span>
+        </div>
+        <p class="balance-amount" id="total-balance">$0.00</p>
+      </article>
+
+      <div class="summary-grid">
+        <article class="card income-card">
+          <div class="card-meta">
+            <span class="dot income-dot" aria-hidden="true"></span>
+            <span class="card-label">Total Ingresos</span>
+          </div>
+          <p class="metric-amount income-text" id="total-income">$0.00</p>
+        </article>
+
+        <article class="card expense-card">
+          <div class="card-meta">
+            <span class="dot expense-dot" aria-hidden="true"></span>
+            <span class="card-label">Total Gastos</span>
+          </div>
+          <p class="metric-amount expense-text" id="total-expense">$0.00</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Calculadora Rápida Integrada -->
+    <section id="calculator-panel" class="card calculator-panel hidden" aria-label="Calculadora rápida">
+      <div class="panel-header">
+        <h2>Calculadora rápida</h2>
+        <button type="button" id="close-calc-btn" class="text-btn">Cerrar</button>
+      </div>
+      <div class="calc-display">
+        <div class="calc-expression" id="calc-expression">&nbsp;</div>
+        <div class="calc-result" id="calc-display-value">0</div>
+      </div>
+      <div class="calc-grid" id="calc-keys">
+        <button type="button" class="calc-key action" data-action="clear">C</button>
+        <button type="button" class="calc-key action" data-action="backspace">⌫</button>
+        <button type="button" class="calc-key operator" data-value="/">÷</button>
+        <button type="button" class="calc-key operator" data-value="*">×</button>
+
+        <button type="button" class="calc-key" data-value="7">7</button>
+        <button type="button" class="calc-key" data-value="8">8</button>
+        <button type="button" class="calc-key" data-value="9">9</button>
+        <button type="button" class="calc-key operator" data-value="-">−</button>
+
+        <button type="button" class="calc-key" data-value="4">4</button>
+        <button type="button" class="calc-key" data-value="5">5</button>
+        <button type="button" class="calc-key" data-value="6">6</button>
+        <button type="button" class="calc-key operator" data-value="+">+</button>
+
+        <button type="button" class="calc-key" data-value="1">1</button>
+        <button type="button" class="calc-key" data-value="2">2</button>
+        <button type="button" class="calc-key" data-value="3">3</button>
+        <button type="button" class="calc-key equals" data-action="equals">=</button>
+
+        <button type="button" class="calc-key zero" data-value="0">0</button>
+        <button type="button" class="calc-key" data-value=".">.</button>
+        <button type="button" class="calc-key use-amount" data-action="use">Usar monto</button>
+      </div>
+    </section>
+
+    <!-- Formulario de Registro / Edición -->
+    <section class="card form-section" aria-label="Registrar movimiento">
+      <div class="panel-header">
+        <h2 id="form-title">Nuevo movimiento</h2>
+        <button type="button" id="cancel-edit-btn" class="text-btn hidden">Cancelar edición</button>
+      </div>
+
+      <form id="transaction-form" novalidate>
+        <input type="hidden" id="edit-id" value="">
+
+        <div class="type-toggle" role="radiogroup" aria-label="Tipo de movimiento">
+          <input type="radio" name="type" id="type-expense" value="expense" checked>
+          <label for="type-expense" class="type-pill expense-pill">Gasto</label>
+
+          <input type="radio" name="type" id="type-income" value="income">
+          <label for="type-income" class="type-pill income-pill">Ingreso</label>
+        </div>
+
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="description">Descripción</label>
+            <input type="text" id="description" name="description" placeholder="Ej. Quincena, Luz, Súper..." maxlength="60" required>
+          </div>
+
+          <div class="field">
+            <label for="amount">Monto</label>
+            <div class="input-prefix">
+              <span>$</span>
+              <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" min="0.01" inputmode="decimal" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="category">Categoría</label>
+            <select id="category" name="category" required>
+              <option value="Comida">Comida</option>
+              <option value="Servicios">Servicios</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Vivienda">Vivienda</option>
+              <option value="Salud">Salud</option>
+              <option value="Entretenimiento">Entretenimiento</option>
+              <option value="Salario">Salario</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+
+          <div class="field field-full">
+            <label for="date">Fecha</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+        </div>
+
+        <p class="form-error hidden" id="form-error" role="alert"></p>
+
+        <button type="submit" class="btn-primary" id="submit-btn">Agregar movimiento</button>
+      </form>
+    </section>
+
+    <!-- Historial y Filtros -->
+    <section class="card history-section" aria-label="Historial de movimientos">
+      <div class="history-header">
+        <h2>Movimientos <span class="count-badge" id="movements-count">0</span></h2>
+        <div class="filter-group" role="tablist" aria-label="Filtrar movimientos">
+          <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+          <button type="button" class="filter-btn" data-filter="income" role="tab" aria-selected="false">Ingresos</button>
+          <button type="button" class="filter-btn" data-filter="expense" role="tab" aria-selected="false">Gastos</button>
+        </div>
+      </div>
+
+      <ul class="transaction-list" id="transaction-list"></ul>
+
+      <div class="empty-state hidden" id="empty-state">
+        <p>No hay movimientos para mostrar.</p>
+        <span>Registra tu primer ingreso o gasto arriba.</span>
+      </div>
+    </section>
+
+    <!-- Respaldo y Gestión de Datos -->
+    <section class="card data-section" aria-label="Respaldo y administración de datos">
+      <h2>Respaldo y datos locales</h2>
+      <p class="data-note">Tus datos se guardan únicamente en este dispositivo. Exporta un respaldo periódicamente.</p>
+      <div class="data-actions">
+        <button type="button" id="export-btn" class="btn-secondary">Exportar JSON</button>
+        <button type="button" id="import-btn" class="btn-secondary">Importar JSON</button>
+        <input type="file" id="import-file" accept=".json,application/json" class="hidden">
+        <button type="button" id="reset-btn" class="btn-danger">Reiniciar mes / Borrar todo</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal de Doble Confirmación y Avisos -->
+  <div id="modal-backdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <h3 id="modal-title">Confirmar acción</h3>
+      <p id="modal-message"></p>
+      <div class="modal-actions">
+        <button type="button" id="modal-cancel-btn" class="btn-secondary">Cancelar</button>
+        <button type="button" id="modal-confirm-btn" class="btn-danger">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
