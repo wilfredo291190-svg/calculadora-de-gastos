@@ -69,6 +69,10 @@
           <span class="balance-badge" id="balance-status">Al día</span>
         </div>
         <p class="balance-amount" id="total-balance">$0.00</p>
+        <div class="balance-protection">
+          <button type="button" id="stop-loss-btn" class="stop-loss-btn">Configurar Stop Loss</button>
+          <p id="spendable-balance" class="spendable-balance hidden"></p>
+        </div>
       </article>
 
       <div class="summary-grid">
@@ -177,6 +181,22 @@
             <label for="date">Fecha</label>
             <input type="date" id="date" name="date" required>
           </div>
+
+          <div class="field">
+            <label for="transaction-nature">Corresponde a</label>
+            <select id="transaction-nature" name="nature">
+              <option value="Gasto fijo">Gasto fijo</option>
+              <option value="Variable">Variable</option>
+              <option value="Deuda / Tarjeta">Deuda / Tarjeta</option>
+              <option value="Ahorro">Ahorro</option>
+              <option value="Ingreso quincenal">Ingreso quincenal</option>
+              <option value="Otro" selected>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Quincena asignada</label>
+            <span id="pay-period-badge" class="pay-period-badge">Quincena: —</span>
+          </div>
         </div>
 
         <p class="form-error hidden" id="form-error" role="alert"></p>
@@ -194,6 +214,9 @@
           <button type="button" class="filter-btn" data-filter="income" role="tab" aria-selected="false">Ingresos</button>
           <button type="button" class="filter-btn" data-filter="expense" role="tab" aria-selected="false">Gastos</button>
         </div>
+        <select id="period-filter" class="period-filter" aria-label="Filtrar por quincena">
+          <option value="all">Todas las quincenas</option>
+        </select>
       </div>
 
       <ul class="transaction-list" id="transaction-list"></ul>
@@ -222,6 +245,14 @@
     <div class="modal-card">
       <h3 id="modal-title">Confirmar acción</h3>
       <p id="modal-message"></p>
+      <div id="modal-input-container" class="modal-input-container hidden">
+        <label for="modal-stop-loss-input">Saldo mínimo protegido</label>
+        <div class="input-prefix">
+          <span>$</span>
+          <input type="number" id="modal-stop-loss-input" min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+        </div>
+        <small>Usa 0 para desactivar el Stop Loss.</small>
+      </div>
       <div class="modal-actions">
         <button type="button" id="modal-cancel-btn" class="btn-secondary">Cancelar</button>
         <button type="button" id="modal-confirm-btn" class="btn-danger">Continuar</button>

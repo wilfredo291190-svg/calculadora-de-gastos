@@ -201,6 +201,48 @@ body {
   word-break: break-word;
 }
 
+.balance-protection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.stop-loss-btn,
+.pay-period-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.stop-loss-btn {
+  cursor: pointer;
+}
+
+.stop-loss-btn:hover {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.spendable-balance {
+  margin: 0;
+  color: var(--income);
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.spendable-balance.is-warning {
+  color: #fbbf24;
+}
+
 .balance-card.is-positive .balance-amount {
   color: var(--income);
 }
@@ -438,6 +480,13 @@ body {
   border-color: var(--border-focus);
 }
 
+.pay-period-badge {
+  min-height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  border-color: var(--border-subtle);
+}
+
 .input-prefix {
   position: relative;
   display: flex;
@@ -563,6 +612,18 @@ body {
   color: var(--text-primary);
 }
 
+.period-filter {
+  min-width: 0;
+  max-width: 100%;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
 .transaction-list {
   list-style: none;
   margin: 0;
@@ -613,6 +674,28 @@ body {
   padding: 2px 8px;
   border-radius: 999px;
   font-weight: 600;
+}
+
+.tx-period,
+.tx-nature,
+.tx-emergency {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+.tx-period {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent);
+}
+
+.tx-nature {
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.tx-emergency {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
 }
 
 .tx-right {
@@ -734,6 +817,40 @@ body {
   margin: 0 0 18px;
   color: var(--text-secondary);
   font-size: 0.92rem;
+}
+
+.modal-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: -4px 0 18px;
+}
+
+.modal-input-container label {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.modal-input-container input {
+  width: 100%;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 11px 12px 11px 26px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.modal-input-container input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+.modal-input-container small {
+  color: var(--text-muted);
+  font-size: 0.75rem;
 }
 
 .modal-actions {
